@@ -251,7 +251,7 @@ resolver.define('createTestIssueType', ({ context }) =>
       headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
       body: JSON.stringify({
         name: TEST_ISSUE_TYPE_NAME,
-        description: 'Caso de teste gerenciado pelo Gestor de Testes.',
+        description: 'Caso de teste gerenciado pelo Assay.',
         hierarchyLevel: 0,
       }),
     });

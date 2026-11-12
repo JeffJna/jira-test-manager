@@ -192,8 +192,6 @@ const App = () => {
 
   return (
     <Stack space="space.300">
-      <Heading size="medium">Gestor de Testes: configuração</Heading>
-
       {error && (
         <SectionMessage appearance="error" title="Algo deu errado">
           <Text>{error}</Text>

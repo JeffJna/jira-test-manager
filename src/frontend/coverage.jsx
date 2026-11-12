@@ -36,6 +36,19 @@ const rowStyle = xcss({
   borderBottomStyle: 'solid',
 });
 
+// Ex.: "3 testes: 2 passando, 1 falhando" — só mostra as categorias que têm testes.
+function countsSummary(counts) {
+  const parts = [
+    [counts.PASSED, 'passando'],
+    [counts.FAILED, 'falhando'],
+    [counts.BLOCKED, counts.BLOCKED === 1 ? 'bloqueado' : 'bloqueados'],
+    [counts.NOT_RUN, 'sem resultado'],
+  ]
+    .filter(([count]) => count > 0)
+    .map(([count, label]) => `${count} ${label}`);
+  return `${counts.total} ${counts.total === 1 ? 'teste' : 'testes'}: ${parts.join(', ')}`;
+}
+
 const formatDate = (iso) => (iso ? new Date(iso).toLocaleDateString('pt-BR') : '');
 
 function IssueLine({ item }) {
@@ -52,7 +65,7 @@ function LinkHint({ isTest, linkTypeReady }) {
       <SectionMessage appearance="information" title="Cobertura ainda não configurada">
         <Text>
           Peça a um administrador para criar o tipo de vínculo "Cobertura de teste" em Configurações →
-          Apps → Gestor de Testes.
+          Apps → Assay.
         </Text>
       </SectionMessage>
     );
@@ -71,17 +84,13 @@ function StoryCoverage({ data }) {
   const { counts } = data;
   return (
     <Stack space="space.150">
-      <Inline space="space.100" alignBlock="center">
-        <Lozenge appearance={overall.appearance} isBold>
+      {/* Em linhas separadas: a coluna lateral do Jira é estreita e cortava o selo. */}
+      <Inline>
+        <Lozenge appearance={overall.appearance} isBold maxWidth={240}>
           {overall.label}
         </Lozenge>
-        {counts.total > 0 && (
-          <Text>
-            {counts.total} {counts.total === 1 ? 'teste' : 'testes'} · {counts.PASSED} passando ·{' '}
-            {counts.FAILED} falhando · {counts.BLOCKED} bloqueado · {counts.NOT_RUN} sem resultado
-          </Text>
-        )}
       </Inline>
+      {counts.total > 0 && <Text>{countsSummary(counts)}</Text>}
 
       {data.tests.length === 0 ? (
         <LinkHint isTest={false} linkTypeReady={data.linkTypeReady} />

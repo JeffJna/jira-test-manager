@@ -1,4 +1,4 @@
-# Gestor de Testes para Jira (open source)
+# Assay — Open Source Test Management for Jira
 
 Gestão de casos de teste **dentro do Jira Cloud**, gratuita e open source (MIT).
 Construído sobre o [Atlassian Forge](https://developer.atlassian.com/platform/forge/): roda na
@@ -28,7 +28,7 @@ infraestrutura da Atlassian, sem servidor próprio.
 
 ## Importar resultados do CI
 
-1. Em **Configurações → Apps → Gestor de Testes**, clique em **Gerar token de importação**.
+1. Em **Configurações → Apps → Assay**, clique em **Gerar token de importação**.
    Copie o token (ele só aparece uma vez) e a URL de importação.
 2. Guarde os dois como segredos no CI, por exemplo `JIRA_TESTS_URL` e `JIRA_TESTS_TOKEN`.
 3. Vincule cada teste automatizado ao issue "Teste" pela chave Jira, de uma destas formas:
@@ -97,7 +97,7 @@ forge install            # escolha "Jira" e o seu site
 
 Depois de instalar:
 
-1. No Jira, vá em **Configurações → Apps → Gestor de Testes** e clique em
+1. No Jira, vá em **Configurações → Apps → Assay** e clique em
    **Criar tipo de issue "Teste"** e em **Criar tipo de vínculo** (para a cobertura).
 2. Adicione o tipo "Teste" ao esquema de tipos de issue dos projetos que vão usá-lo.
 3. Crie um issue do tipo "Teste" e abra o painel **Passos do teste** pelo botão de apps do issue.
